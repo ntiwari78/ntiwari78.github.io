@@ -1,134 +1,301 @@
-<html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Niraj's Resume</title>
-  <meta name="author" content="Niraj Kumar Tiwari">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="HandheldFriendly" content="true">
-  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Simonetta:400,900|Balthazar">
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <link rel="stylesheet" type="text/css" href="responsive.css">
-</head>
+<meta charset="utf-8">
+<title>Niraj Kumar Tiwari - Resume</title>
+<style>
+  @page { size: A4; margin: 10mm 12mm 10mm 12mm; }
+  :root {
+    --ink: #1f2933;
+    --muted: #52606d;
+    --navy: #0f2a47;
+    --accent: #1f6fb2;
+    --accent-soft: #e8f1fa;
+    --rule: #d5dde5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    font-size: 9pt;
+    line-height: 1.3;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
+  /* Header */
+  header {
+    background: var(--navy);
+    color: #fff;
+    padding: 11px 18px 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid var(--accent);
+    text-align: center;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 23pt;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+  }
+  header .role {
+    margin-top: 1px;
+    font-size: 10.5pt;
+    color: #a9cdee;
+    font-weight: 600;
+    letter-spacing: .3px;
+  }
+  header .contact {
+    margin-top: 7px;
+    font-size: 8.8pt;
+    color: #dbe7f3;
+  }
+  header .contact span + span::before {
+    content: "|";
+    margin: 0 8px;
+    color: #6f8fb0;
+  }
+
+  /* Metrics strip */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin: 7px 0 0;
+  }
+  .metric {
+    background: var(--accent-soft);
+    border-top: 3px solid var(--accent);
+    padding: 5px 7px 6px;
+    border-radius: 3px;
+    text-align: center;
+  }
+  .metric b {
+    display: block;
+    font-size: 12.5pt;
+    color: var(--navy);
+    line-height: 1.15;
+  }
+  .metric small { font-size: 7.6pt; color: var(--muted); line-height: 1.2; display: block; }
+
+  /* Sections */
+  h2 {
+    font-size: 10.6pt;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--navy);
+    margin: 8px 0 4px;
+    padding-bottom: 3px;
+    border-bottom: 1.5px solid var(--accent);
+    break-after: avoid;
+  }
+  p { margin: 0 0 4px; }
+  .summary { text-align: justify; }
+
+  ul { margin: 2px 0 0; padding-left: 15px; }
+  li { margin: 0 0 1.5px; padding-left: 2px; }
+  li::marker { color: var(--accent); }
+  li b, .lead { color: var(--navy); font-weight: 650; }
+
+  /* Competencies grid */
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px 12px;
+  }
+  .comp {
+    border-left: 3px solid var(--accent);
+    padding: 1px 0 1px 7px;
+  }
+  .comp .lead { display: block; font-size: 9.2pt; }
+  .comp span { color: var(--muted); font-size: 8.8pt; }
+
+  /* Jobs */
+  .job { margin: 0 0 6px; break-inside: avoid; }
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .job-title { font-weight: 700; font-size: 10.2pt; color: var(--navy); }
+  .job-org { font-weight: 600; color: var(--accent); }
+  .dates {
+    white-space: nowrap;
+    font-size: 8.6pt;
+    font-weight: 600;
+    color: var(--muted);
+    background: #f1f4f7;
+    padding: 1px 7px;
+    border-radius: 10px;
+  }
+  .job-intro { color: var(--muted); font-style: italic; margin: 2px 0 2px; }
+  .sub {
+    margin: 5px 0 1px;
+    font-size: 8.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: var(--accent);
+  }
+
+  /* Education */
+  .edu { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; }
+  .edu .yr { color: var(--muted); font-weight: 600; text-align: right; }
+  .edu .note { grid-column: 1 / -1; color: var(--muted); font-size: 8.6pt; margin: -2px 0 2px; }
+
+  /* Skills table */
+  table.skills { width: 100%; border-collapse: collapse; }
+  table.skills td { padding: 2px 6px; vertical-align: top; border-bottom: 1px solid var(--rule); }
+  table.skills tr:last-child td { border-bottom: 0; }
+  table.skills td:first-child {
+    width: 23%;
+    font-weight: 650;
+    color: var(--navy);
+    background: var(--accent-soft);
+  }
+  a { color: inherit; text-decoration: none; }
+  .keep { break-inside: avoid; }
+</style>
+</head>
 <body>
-	<div id="w" itemscope itemtype="http://schema.org/Person">
-		<header class="clearfix">
-			<div id="info">			
-				<h1><span itemprop="name">Niraj Kumar Tiwari</span></h1>
-				<h3><span itemprop="jobTitle">Manager, Software Development 2</span></h3>
-				<small itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-				  <span itemprop="addressRegion">Bangalore</span>, 
-				  <span itemprop="addressCountry">India</span>
-				</small>
-				<small><span itemprop="email"><a href="mailto:niraj.tiwari@gmail.com" target="_blank">niraj.tiwari@gmail.com</a></span></small>
-				<small><a href="https://www.linkedin.com/in/nirajtiwari" itemprop="url">My Profile</a> &bull; <a  itemprop="url">+91 7899676442</a></small>
-			</div>
-			
-			<div id="photo">
-				<img src="http://i.imgur.com/czG3brgb.jpg" alt="Niraj resume photo avatar" itemprop="image" />
-			</div>
-		</header>
-		
-		<section id="profile">
-			<h2>My History &amp; Profile</h2>
-			<p itemprop="description">I am Manager, Software Development 2 currently working for Risk Business Obligation team of PayPal since September, 2017. Prior to joining this team, I was part of Merchant and Marketplaces team (formerly Marketplaces team) of PayPal where I started as developer and then became team lead in 2008. I have played different roles like team member, team lead, scrum master, release integration engineer and participated in all parts of development cycle. Before joining PayPal, I worked as Associate Technology L2 for Sapient (I) Pvt. Ltd. I started my career as Software Engineer at Dharma Systems, Bangalore. </p>
-			
-			<p>I have Bachelor in Computer Applications(2001) and Master in Computer Application(2004). Besides, I have attended FPGDST from NCST.</p>
-		</section>
-		
-		<section id="skills" class="clearfix" itemscope itemtype="http://schema.org/ItemList">
-			<h2 itemprop="name">Skillset</h2>
-			<section id="skills-left">
-				<h4 itemprop="about">Development</h4>
-				<ul>
-					<li itemprop="itemListElement">C/C++</li>
-					<li itemprop="itemListElement">Python</li>
-					<li itemprop="itemListElement">Perl</li>
-					<li itemprop="itemListElement">Django</li>
-					<li itemprop="itemListElement">Shell Scripting</li>
-					<li itemprop="itemListElement">Java</li>
-					<li itemprop="itemListElement">HTML/CSS</li>
-				</ul>
-			</section>
-			
-			<section id="skills-right">
-				<h4 itemprop="about">Tools/Environment</h4>
-				<ul>
-					<li itemprop="itemListElement">Git</li>
-					<li itemprop="itemListElement">GitHub</li>
-					<li itemprop="itemListElement">Jira</li>
-					<li itemprop="itemListElement">Perl Dancer</li>
-					<li itemprop="itemListElement">Unix/Linux</li>
-				</ul>
-			</section>
-		</section>
-		
-		<section id="education">
-			<h2>Past Education</h2>
-			<p><span itemprop="alumniOf">&bull; Master of Computer Applications</span> graduate of 2004.</p>
-<p><span itemprop="alumniOf">&bull; Bachelor of Computer Applications</span> graduate of 2001.</p>
-		   
-		</section>
-	
-<section id="awards">
-			<h2>Awards</h2>
-			<p> 	&bull; Received “Star of the Quarter” Award for Q4 2012,  “Cosmic Kudos” PAT(PayPal Appreciates Talent) Award for H1 2010, “Planet” PAT(PayPal Appreciates Talent) Award for Q4 2007 ,“Rising Star” PAT(PayPal Appreciates Talent) award for Q3 2007</p>
-<p>&bull; Payments 101 certificate holder</p>
-		<p> 	&bull; Scored 99 percentile in GA and CC in CST-I Level Exam 2002</p>   
-		</section>
-	
-<section id="strength">
-			<h2>Strengths</h2>
-			<p>		&bull;Technically strong, particularly in DS & Algo, Database internal , c++, perl, python, shell script and Django.</p>
-<p>&bull;Ability to convert vision into reality. </p>
-		<p>&bull;	Strong in team building and mentoring capabilities.</p>
- <p>&bull;Ability to work with different level of people and can manage cross geographies team with equal ease.</p>
-  <p>  	&bull;Well Experienced in Agile based scrum development as well as PDLC.</p>
-		</section>
-	    
-		<section id="experience">
-			<h2>Work Experience</h2><p>
-<p>&bull;MTS1, Software Engineer(PayPal Pte. Ltd.) ~ 2012- till date</p>
-						<p>&bull;Software Engineer 3(PayPal India Pvt. Ltd) ~ 2008-2012</p>
-			<p>&bull;Associate Project Level 3(Covansys India Pvt. Ltd.) ~2006-2008</p>
-<p>&bull;Associate Technology Level 2(Sapient) ~ 2004-2006</p> 
- <p>&bull;Software Engineer(Dharma Systems) ~ 2003-2004</p>     
-		</section>
-		
-		<section id="projects">
-			<h2>Key projects done at PayPal</h2>
-<p>&bull; Auto Propagate System</p>
-<p>&bull; Change Analyzer</p>
-<p>&bull; ISO contract validator and publisher</p>
-<p>&bull; Library Flattening</p>
-<p>&bull; Streamlined Seller registration</p>
-<p>&bull; Multi-user shipping</p>
-<p>&bull; France Shipping</p>
-<p>&bull; Trinity Infrastructure development</p>
-      <p>&bull; MSKU support in eBay checkout</p>
-      <p>&bull; PIE-ET (External Token)</p>
-      <p>&bull; ITUB enhancement</p>
-      <p>&bull; SOX compliance for USPS</p>
-      <p>&bull; SOX compliance for AMEX</p>
-      <p>&bull; UCP-DE Negative balance</p>
-      <p>&bull; Quality of Service and Quality of Service – dashboard</p>
-		</section>
-<section id="projects">
-			<h2>Key projects done at Sapient</h2>
-<p>&bull;Phase 3b Build/PMO Billing System</p>
-<p>&bull;eGlue Ramp-up / Report</p> 
-<p>&bull;RDW-Phase 1</p>
-</section>
-<section id="projects">
-			<h2>Key projects done at Dharma</h2>
-<p>&bull;Unicode Support For Dharma/Sql Access</p>
-<p>&bull;Context Sensitive Error Message Support</p> 
-<p>&bull;"OR" Query Optimization</p>
-<p>&bull;"LIKE" Query Optimization</p>
-<p> &bull;General Release of Dharma/Sql Access </p>
-</section>
-	</div>
+
+<header>
+  <h1>NIRAJ KUMAR TIWARI</h1>
+  <div class="role">Enterprise Architect &nbsp;·&nbsp; Agentic AI &nbsp;·&nbsp; Engineering Leadership</div>
+  <div class="contact">
+    <span>Bengaluru, Karnataka</span><span>+91 9353160648</span><span>niraj.tiwari@gmail.com</span>
+  </div>
+</header>
+
+
+<h2 style="margin-top:10px">Executive Summary</h2>
+<p class="summary">Enterprise Architect with 22+ years of engineering experience and a hands-on focus on agentic AI: tool-using LLM systems, governed enterprise AI platforms, and coding-agent-assisted legacy modernization. As Engineering Head of EconomicTimes.com, led an 89-engineer organization and shipped five production GenAI products, while helping grow annual subscription revenue. Founded EfficientAI Labs and shipped ShikshaPal, an offline-first on-device AI tutor, to the App Store and Play Store. Now Enterprise Architect at Brillio under the CTO's Centre of Excellence, architecting agentic workflows and AI-assisted discovery for global enterprise clients. Built on 12+ years at PayPal running payment and compliance systems at six-nines availability under SOX and PCI controls. Hybrid M.Tech in AI &amp; Data Science, IIT Patna (2026); published in IEEE Access.</p>
+
+<h2>Agentic AI Highlights</h2>
+<ul>
+  <li><b>Tool-using LLM agent:</b> Built ET Market GPT, an LLM agent that interprets investor questions and calls tools for live quotes, fundamentals, and news, with RAG grounding and cited answers on proprietary financial data.</li>
+  <li><b>Intent to structured action:</b> Designed ET AI Screener to turn natural language into schema-validated, composable filter operations over 1,500+ fields, keeping the model out of the execution path.</li>
+  <li><b>Multi-step generation pipelines:</b> Automated ET AI Podcast and ET Briefs, chaining scripting, multi-speaker dialogue, and TTS so audio is produced as articles publish.</li>
+  <li><b>On-device agents and model routing:</b> Shipped config-driven routing across quantized SLMs (Phi-3, Qwen 2.5 Math, Gemma), running fully offline (ShikshaPal).</li>
+</ul>
+
+<h2>Core Competencies</h2>
+<div class="grid2">
+  <div class="comp"><span class="lead">Applied GenAI Engineering</span><span>RAG pipelines, fine-tuning (LoRA/QLoRA), quantization and on-device inference, NLU/NLP, TTS and voice</span></div>
+  <div class="comp"><span class="lead">Technology Strategy and Transformation</span><span>AI-led modernization, legacy-to-cloud migration, target-state blueprints, build-vs-buy and vendor strategy, Agile/DevOps adoption</span></div>
+  <div class="comp"><span class="lead">Payments and Financial Platforms</span><span>Checkout and payment orchestration, tax and regulatory compliance engineering (SOX, PCI-DSS), six-nines transaction systems</span></div>
+  <div class="comp"><span class="lead">Cloud and Platform Engineering</span><span>Cloud-native and microservices architecture, Azure / GCP / AWS, Kubernetes, Kafka and event-driven design, API-first platforms</span></div>
+  <div class="comp"><span class="lead">Engineering Leadership</span><span>Building and scaling high-performing teams, CXO and cross-functional stakeholder management, global and offshore delivery</span></div>
+</div>
+
+<h2>Professional Experience</h2>
+
+<div class="job">
+  <div class="job-head">
+    <div><span class="job-title">Enterprise Architect</span> &nbsp;|&nbsp; <span class="job-org">Brillio (CTO's Centre of Excellence)</span></div>
+    <div class="dates">Aug 2026 – Present</div>
+  </div>
+  <p class="job-intro">Architect in the CTO organization, leading AI-led modernization and enterprise AI engagements for global clients.</p>
+  <ul>
+    <li><b>AI-assisted legacy discovery:</b> Architecture lead on discovery for a global relocation services client's legacy Home Sale application (mainframe/COBOL, no documentation or SMEs).</li>
+    <li><b>Governed AI platform design:</b> Architected the Bringing Smiles AI Coach platform for Brillio's CSR program, supporting underserved Grade 9 students from enrollment to alumni tracking.</li>
+    <li><b>Solution blueprints:</b> Define blueprints across cloud-native architecture, event-driven design, and enterprise AI platforms (model gateways, RAG services, agentic workflows, governance).</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="job-head">
+    <div><span class="job-title">Founder</span> &nbsp;|&nbsp; <span class="job-org">EfficientAI Labs Pvt Ltd (ShikshaPal)</span></div>
+    <div class="dates">Apr 2026 – Aug 2026</div>
+  </div>
+  <p class="job-intro">Founded and built ShikshaPal, an offline-first AI tutoring app for NCERT K-12 students that answers fully on-device; shipped to the App Store and Play Store.</p>
+  <ul>
+    <li>Designed the on-device inference pipeline on quantized SLMs (GGUF, INT4), delivering sub-second responses on mid-range Android devices with no cloud cost and full student privacy.</li>
+    <li>Built config-driven model routing across Phi-3, Qwen 2.5 Math, and Gemma, with multilingual prompt handling for Indic-language queries.</li>
+    <li>Shipped three branded models (MathMentor Pro, QuickScholar, DeepScholar) fine-tuned with LoRA/QLoRA; fine-tuned variants outperformed base models by 11 to 14 points on custom evals.</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="job-head">
+    <div><span class="job-title">Engineering Head</span> &nbsp;|&nbsp; <span class="job-org">EconomicTimes.com, Times Internet Ltd.</span></div>
+    <div class="dates">Apr 2022 – Apr 2026</div>
+  </div>
+  <p class="job-intro">Led an 89-engineer organization for India's premier financial news and markets platform; owned technology strategy, platform delivery, and the AI transformation roadmap while staying hands-on in architecture.</p>
+  <div class="sub">Agentic and GenAI Product Portfolio</div>
+  <ul>
+    <li><b>ET Market GPT:</b> LLM agent for natural-language questions on proprietary financial data; RAG with tool calling for live quotes, fundamentals, and news, grounded with citations.</li>
+    <li><b>ET AI Screener:</b> NLU stock screening that converts intent ("profitable midcap pharma with low debt") into schema-validated filter operations over 1,500+ fields.</li>
+    <li><b>ET AI Podcast and ET Briefs:</b> Automated multi-speaker podcast generation and TTS pipelines converting articles into audio as content publishes.</li>
+    <li><b>ET AI Bytz:</b> Intent-based newsletter personalization using NLP over preference and behavior signals.</li>
+  </ul>
+  <div class="sub">Business, Platform and Scale</div>
+  <ul>
+    <li>Helped grow annual subscription revenue through ML-driven Adaptive Paywall models (segmentation, propensity scoring, conversion prediction) and a multi-tenant subscription platform serving all BCCL properties.</li>
+    <li>Built the real-time NSE/BSE feed platform with sub-second latency and live-streaming infrastructure for millions of concurrent market-hours sessions; replaced third-party data intermediaries with direct leased-line integration.</li>
+    <li>Core Web Vitals excellence via layered CDN caching and HTTP/3.</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="job-head">
+    <div><span class="job-title">Senior Engineering Manager</span> &nbsp;|&nbsp; <span class="job-org">Jio Platforms Ltd.</span></div>
+    <div class="dates">Mar 2020 – Mar 2022</div>
+  </div>
+  <ul>
+    <li>Led the Transport Management System, one of three core pillars of Jio's in-house supply chain platform, built from scratch on open-source technologies.</li>
+    <li>Architected an event-driven TMS with ML-based route optimization across first, mid, and last mile; scaled JioMart fulfillment from <b>1 city to about 200 cities in 200 days</b> during the COVID surge.</li>
+    <li>Led the Azure CI/CD rollout within the Supply Chain group.</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="job-head">
+    <div><span class="job-title">Manager, Software Development 2 / Tech Lead / MTS</span> &nbsp;|&nbsp; <span class="job-org">PayPal</span></div>
+    <div class="dates">Oct 2007 – Mar 2020</div>
+  </div>
+  <p class="job-intro">12+ years across payments, core platform, and compliance at global scale (about 10K TPS baseline, 10 to 20x on peak days).</p>
+  <ul>
+    <li>Six years on the Checkout platform driving <b>about 93% of PayPal revenue</b>; built shipping and coupon/incentive infrastructure from scratch.</li>
+    <li><b>Core Platform and Infrastructure (Singapore):</b> moved release cadence from fixed two-week cycles to on-demand deployment through Git/GitHub and CI/CD adoption.</li>
+    <li>Founded and scaled the Tax and Compliance Engineering Centre of Excellence in Bangalore under SOX/PCI controls.</li>
+    <li>Improved ITUB batch performance <b>30x</b>; led integrations across PayPal, eBay, Pitney Bowes, and USPS.</li>
+    <li><b>Awards:</b> Star of the Quarter (Q4 2012), Cosmic Kudos PAT (H1 2010), Planet PAT (Q4 2007), Rising Star (Q3 2007).</li>
+  </ul>
+</div>
+
+<div class="keep">
+<h2>Research, Publications and Open Source</h2>
+<ul>
+  <li><b>IEEE Access (published):</b> "Voice Cloning: A Survey of Zero-Shot and Controllable Speech Synthesis", with Prof. Asif Ekbal and Deepak Kumar. ieeexplore.ieee.org/document/11647040</li>
+  <li><b>Companion resource:</b> ntiwari78.github.io/zsvoicecloning</li>
+  <li><b>awesome-slm-papers (GitHub, MIT):</b> Curated, categorized index of small language model research, covering agents and tool use, edge and on-device AI, and the Indic SLM ecosystem.</li>
+</ul>
+</div>
+
+<div class="keep">
+<h2>Education</h2>
+<div class="edu">
+  <div><b class="lead">Hybrid M.Tech in AI &amp; Data Science</b>, IIT Patna</div><div class="yr">2026</div>
+  <div class="note">Advisor: Prof. Asif Ekbal &nbsp;·&nbsp; Research: emotion-controlled multilingual TTS</div>
+  <div><b class="lead">M.Tech in Software Systems</b>, BITS Pilani</div><div class="yr">2023</div>
+  <div><b class="lead">MBA (Executive)</b>, SIBM Bengaluru</div><div class="yr">2021</div>
+  <div><b class="lead">Master of Computer Applications</b>, IGNOU, New Delhi</div><div class="yr">2004</div>
+</div>
+</div>
+
+<div class="keep">
+<h2>Technical Skills</h2>
+<table class="skills">
+  <tr><td>Agents and LLMs</td><td>Function calling, tool use, ReAct, agentic RAG, model routing, guardrails, prompt engineering, eval harnesses (RAGAS); OpenAI, Anthropic Claude, Llama, Mistral, Qwen, Phi, Gemma; coding agents (Claude Code, GitHub Copilot)</td></tr>
+  <tr><td>AI/ML</td><td>Python, PyTorch, Hugging Face Transformers, LangChain, LlamaIndex, sentence-transformers, LoRA/QLoRA, GGUF/llama.cpp</td></tr>
+  <tr><td>Backend</td><td>Python, Java, C++, Spring Boot, Django, FastAPI, microservices, REST/gRPC</td></tr>
+  <tr><td>Data and Streaming</td><td>Kafka, real-time pipelines, Oracle, MySQL, Cassandra, vector databases</td></tr>
+  <tr><td>Cloud and MLOps</td><td>Azure, Azure ML, GCP, AWS, Docker, Kubernetes, CI/CD, model registry, monitoring</td></tr>
+</table>
+</div>
+
 </body>
 </html>
